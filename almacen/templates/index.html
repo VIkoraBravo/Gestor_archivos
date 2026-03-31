@@ -1,164 +1,48 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Mi Nube - Nicolas Acuña</title>
-<style>
-    /* Importamos una fuente moderna de Google */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
-
-    body { 
-        font-family: 'Inter', sans-serif; 
-        background-color: #f4f7f6; 
-        color: #333;
-        margin: 0;
-        padding: 40px 20px;
-        display: flex;
-        justify-content: center;
-    }
-
-    .box { 
-        background: white; 
-        padding: 40px; 
-        border-radius: 16px; 
-        width: 100%;
-        max-width: 550px; 
-        box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
-    }
-
-    h1 { 
-        font-weight: 600; 
-        font-size: 24px; 
-        margin-bottom: 30px; 
-        color: #1a1a1a;
-        text-align: center;
-    }
-
-    /* Estilo para los campos del formulario */
-    form p {
-        margin-bottom: 20px;
-    }
-
-    input[type="text"], input[type="file"] {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #e1e1e1;
-        border-radius: 8px;
-        font-size: 14px;
-        transition: all 0.3s ease;
-        box-sizing: border-box;
-    }
-
-    input[type="file"] {
-        background: #fdfdfd;
-        border: 2px dashed #d1d5db;
-        padding: 20px;
-        text-align: center;
-    }
-
-    input:focus {
-        border-color: #4f46e5;
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-    }
-
-    .btn { 
-        background: #4f46e5; 
-        color: white; 
-        border: none; 
-        padding: 14px; 
-        border-radius: 8px; 
-        cursor: pointer; 
-        width: 100%; 
-        font-size: 16px;
-        font-weight: 600;
-        transition: background 0.2s;
-    }
-
-    .btn:hover { background: #4338ca; }
-
-    hr { border: 0; border-top: 1px solid #eee; margin: 30px 0; }
-
-    /* Estilo de la lista de archivos */
-    .archivo-item { 
-        background: #ffffff;
-        border: 1px solid #f0f0f0;
-        padding: 16px; 
-        border-radius: 12px;
-        display: flex; 
-        justify-content: space-between; 
-        align-items: center;
-        margin-bottom: 12px;
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .archivo-item:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-
-    .archivo-info {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .icon { font-size: 20px; }
-
-    .archivo-nombre {
-        font-weight: 500;
-        color: #2d3748;
-    }
-
-    .acciones { display: flex; gap: 15px; }
-
-    .link-ver { color: #4f46e5; text-decoration: none; font-weight: 600; font-size: 14px; }
-    .link-borrar { color: #ef4444; text-decoration: none; font-weight: 600; font-size: 14px; }
-    
-    .link-ver:hover { text-decoration: underline; }
-    .link-borrar:hover { color: #dc2626; }
-</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Nube - Nicolas</title>
+    <!-- Cargamos el CSS plano directamente desde la carpeta static -->
+    <link rel="stylesheet" href="{% static 'estilos.css' %}">
 </head>
 <body>
-    <div class="box">
-        <h1>☁️ Mi Almacén de Archivos</h1>
+    <div class="container">
+        <h1>☁️ Mi Nube Personal</h1>
         
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn">Subir a la nube</button>
+            <button type="submit" class="btn-upload">Subir Archivo</button>
         </form>
 
         <hr>
 
-        <h3>Archivos Guardados:</h3>
-<div style="display: flex; flex-direction: column; gap: 10px;">
-    {% for doc in archivos %}
-        <div class="archivo-item" style="background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #ddd;">
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <span>
-                    {% if ".pdf" in doc.archivo.url %} 📄 
-                    {% elif ".jpg" in doc.archivo.url or ".png" in doc.archivo.url %} 🖼️ 
-                    {% else %} 📁 {% endif %}
-                </span>
-                
-                <strong>{{ doc.titulo }}</strong>
-            </div>
+        <h3 style="font-size: 18px; margin-bottom: 15px;">Tus Archivos</h3>
+        
+        <div class="file-list">
+            {% for doc in archivos %}
+                <div class="file-card">
+                    <div class="file-info">
+                        <span>
+                            {% if ".pdf" in doc.archivo.url %}📄{% elif ".jpg" in doc.archivo.url or ".png" in doc.archivo.url %}🖼️{% else %}📁{% endif %}
+                        </span>
+                        <span class="file-name">{{ doc.titulo }}</span>
+                    </div>
 
-            <div style="display: flex; gap: 15px;">
-                <a href="{{ doc.archivo.url }}" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">Ver</a>
-                
-                <a href="{% url 'eliminar_archivo' doc.id %}" 
-                   style="color: #e74c3c; text-decoration: none; font-weight: bold;"
-                   onclick="return confirm('¿Seguro que quieres borrar este archivo?')">
-                   Borrar
-                </a>
-            </div>
+                    <div class="btn-group">
+                        <a href="{{ doc.archivo.url }}" target="_blank" class="link-action view">Ver</a>
+                        <a href="{% url 'eliminar_archivo' doc.id %}" 
+                           class="link-action delete" 
+                           onclick="return confirm('¿Borrar este archivo de la nube?')">Borrar</a>
+                    </div>
+                </div>
+            {% empty %}
+                <p style="text-align: center; color: #94a3b8; font-size: 14px;">Tu nube está vacía.</p>
+            {% endfor %}
         </div>
-    {% empty %}
-        <p style="text-align: center; color: #888;">No hay archivos en tu nube todavía.</p>
-    {% endfor %}
-</div>
     </div>
 </body>
 </html>

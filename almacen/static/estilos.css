@@ -1,0 +1,130 @@
+/* Importamos una fuente moderna */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: #f8fafc; 
+    color: #1e293b;
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.container { 
+    background: white; 
+    padding: 40px; 
+    border-radius: 20px; 
+    width: 100%;
+    max-width: 500px; 
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); 
+}
+
+h1 { 
+    font-weight: 600; 
+    font-size: 26px; 
+    margin-bottom: 25px; 
+    color: #0f172a;
+    text-align: center;
+    letter-spacing: -0.025em;
+}
+
+/* Formulario */
+form p {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+input[type="text"], input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: all 0.2s;
+    box-sizing: border-box;
+}
+
+input[type="file"] {
+    background: #f1f5f9;
+    border: 2px dashed #cbd5e1;
+    padding: 20px;
+    cursor: pointer;
+}
+
+input:focus {
+    border-color: #6366f1;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.4);
+}
+
+.btn-upload { 
+    background: #6366f1; 
+    color: white; 
+    border: none; 
+    padding: 14px; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    width: 100%; 
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+.btn-upload:hover { background: #4f46e5; }
+
+hr { border: 0; border-top: 1px solid #f1f5f9; margin: 30px 0; }
+
+/* Lista de archivos */
+.file-card { 
+    background: #ffffff;
+    border: 1px solid #f1f5f9;
+    padding: 16px; 
+    border-radius: 14px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 12px;
+    transition: all 0.2s;
+}
+
+.file-card:hover {
+    border-color: #e2e8f0;
+    background: #fafafa;
+    transform: scale(1.02);
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.file-name {
+    font-weight: 500;
+    font-size: 15px;
+    color: #334155;
+}
+
+.btn-group { display: flex; gap: 12px; }
+
+.link-action { 
+    text-decoration: none; 
+    font-weight: 600; 
+    font-size: 13px; 
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.view { color: #6366f1; background: #eef2ff; }
+.delete { color: #ef4444; background: #fef2f2; }
+
+.view:hover { background: #e0e7ff; }
+.delete:hover { background: #fee2e2; }

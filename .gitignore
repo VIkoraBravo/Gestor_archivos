@@ -1,0 +1,17 @@
+# Entorno virtual (muy pesado para subirlo)
+venv/
+
+# Base de datos local (privada)
+*.sqlite3
+
+# Archivos temporales de Python
+__pycache__/
+
+# Los archivos que subiste de prueba (no queremos que otros los vean en GitHub)
+media/
+
+# Archivos de configuración de VS Code
+.vscode/
+
+# Carpeta de estáticos generada para el servidor
+staticfiles/

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Nube - Nicolas Acuña</title>
+<style>
+        body { font-family: sans-serif; background: #f0f2f5; padding: 20px; }
+        .box { background: white; padding: 20px; border-radius: 8px; max-width: 600px; margin: auto; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .archivo-item { 
+            border-bottom: 1px solid #eee; 
+            padding: 15px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+        .btn { 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            width: 100%; 
+            font-size: 16px;
+        }
+        .btn:hover { background: #0056b3; }
+
+        /* --- AQUÍ VA EL PUNTO 3 --- */
+        form p {
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="file"] {
+            display: block;
+            margin-top: 8px;
+            padding: 15px;
+            background: #fafafa;
+            border: 2px dashed #ccd1d9; /* Estilo de "zona de carga" */
+            border-radius: 6px;
+            width: 100%;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>☁️ Mi Almacén de Archivos</h1>
+        
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">Subir a la nube</button>
+        </form>
+
+        <hr>
+
+        <h3>Archivos Guardados:</h3>
+<div style="display: flex; flex-direction: column; gap: 10px;">
+    {% for doc in archivos %}
+        <div class="archivo-item" style="background: #fff; padding: 15px; border-radius: 8px; border: 1px solid #ddd;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span>
+                    {% if ".pdf" in doc.archivo.url %} 📄 
+                    {% elif ".jpg" in doc.archivo.url or ".png" in doc.archivo.url %} 🖼️ 
+                    {% else %} 📁 {% endif %}
+                </span>
+                
+                <strong>{{ doc.titulo }}</strong>
+            </div>
+
+            <div style="display: flex; gap: 15px;">
+                <a href="{{ doc.archivo.url }}" target="_blank" style="color: #007bff; text-decoration: none; font-weight: bold;">Ver</a>
+                
+                <a href="{% url 'eliminar_archivo' doc.id %}" 
+                   style="color: #e74c3c; text-decoration: none; font-weight: bold;"
+                   onclick="return confirm('¿Seguro que quieres borrar este archivo?')">
+                   Borrar
+                </a>
+            </div>
+        </div>
+    {% empty %}
+        <p style="text-align: center; color: #888;">No hay archivos en tu nube todavía.</p>
+    {% endfor %}
+</div>
+    </div>
+</body>
+</html>

@@ -1,4 +1,5 @@
-{% load static %} <!DOCTYPE html>
+{% load static %}
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -9,32 +10,22 @@
 <body>
     <div class="container">
         <h1>☁️ Mi Nube Personal</h1>
-        
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn-upload">Subir Archivo</button>
         </form>
-
         <hr>
-
         <h3 style="font-size: 18px; margin-bottom: 15px;">Tus Archivos</h3>
-        
         <div class="file-list">
             {% for doc in archivos %}
                 <div class="file-card">
                     <div class="file-info">
-                        <span>
-                            {% if ".pdf" in doc.archivo.url %}📄{% elif ".jpg" in doc.archivo.url or ".png" in doc.archivo.url %}🖼️{% else %}📁{% endif %}
-                        </span>
                         <span class="file-name">{{ doc.titulo }}</span>
                     </div>
-
                     <div class="btn-group">
                         <a href="{{ doc.archivo.url }}" target="_blank" class="link-action view">Ver</a>
-                        <a href="{% url 'eliminar_archivo' doc.id %}" 
-                           class="link-action delete" 
-                           onclick="return confirm('¿Borrar este archivo de la nube?')">Borrar</a>
+                        <a href="{% url 'eliminar_archivo' doc.id %}" class="link-action delete" onclick="return confirm('¿Borrar?')">Borrar</a>
                     </div>
                 </div>
             {% empty %}

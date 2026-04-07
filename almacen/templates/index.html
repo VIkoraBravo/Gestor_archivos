@@ -9,48 +9,60 @@
 </head>
 <body>
     <header class="header">
-    <nav class="nav">
-        <div class="logo">Vik</div>
-        <ul class="menu">
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Servicios</a></li>
-            <li><a href="#">Contacto</a></li>
-        </ul>
-        <a href="#" class="cta">Empezar</a>
-    </nav>
+        <nav class="nav">
+            <div class="logo">Vik</div>
+            <ul class="menu">
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Servicios</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+            <a href="#" class="cta">Empezar</a>
+        </nav>
     </header>
-    <div class="container">
-        <h1>☁️ Mi Nube Personal</h1>
-        <form method="POST" enctype="multipart/form-data" action="{% url 'index' %}">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn-upload">Subir Archivo</button>
-        </form>
 
-    <div style="margin-top: 15px; text-align: center;">
-        <a href="https://console.cloudinary.com/console/media_library/folders/all" 
-           target="_blank" 
-           style="background-color: #39c5bb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block; font-size: 14px;">
-           ☁️ Gestionar Cloudinary
-        </a>
-    </div>
-        <hr>
-        <h3 style="font-size: 18px; margin-bottom: 15px;">Tus Archivos</h3>
-        <div class="file-list">
-            {% for doc in archivos %}
+    <div class="main-content">
+        
+        <section class="upload-section">
+            <h1>☁️ Mi Nube Personal</h1>
+            <form method="POST" enctype="multipart/form-data" action="{% url 'index' %}">
+                {% csrf_token %}
+                <div class="form-inputs">
+                    {{ form.as_p }}
+                </div>
+                <button type="submit" class="btn-upload">Subir Archivo</button>
+            </form>
+
+            <div style="margin-top: 25px; text-align: center;">
+                <a href="https://console.cloudinary.com/console/media_library/folders/all" 
+                   target="_blank" 
+                   class="btn-cloudinary">
+                   Gestionar Cloudinary
+                </a>
+            </div>
+        </section>
+
+        <section class="files-section">
+            <h2>📂 Tus Archivos</h2>
+            <div class="files-grid">
+                {% for doc in archivos %}
                 <div class="file-card">
                     <div class="file-info">
                         <span class="file-name">{{ doc.titulo }}</span>
                     </div>
                     <div class="btn-group">
                         <a href="{{ doc.archivo.url }}" target="_blank" class="link-action view">Ver</a>
-                        <a href="{% url 'eliminar_archivo' doc.id %}" class="link-action delete" onclick="return confirm('¿Borrar?')">Borrar</a>
+                        <a href="{% url 'eliminar_archivo' doc.id %}" 
+                           class="link-action delete" 
+                           onclick="return confirm('¿Borrar este archivo?')">
+                           Borrar
+                        </a>
                     </div>
                 </div>
-            {% empty %}
-                <p style="text-align: center; color: #94a3b8; font-size: 14px;">Tu nube está vacía.</p>
-            {% endfor %}
-        </div>
+                {% empty %}
+                <p class="empty-msg">Tu nube está vacía actualmente.</p>
+                {% endfor %}
+            </div>
+        </section>
     </div>
 </body>
 </html>

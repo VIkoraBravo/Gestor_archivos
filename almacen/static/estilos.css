@@ -102,7 +102,40 @@ body {
     margin-bottom: 1.5rem;
 }
 
+/* --- MEJORA DE CAMPOS DE FORMULARIO --- */
+.form-inputs p {
+    margin-bottom: 15px;
+}
+
+input[type="text"], 
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #0d1117; /* Fondo más oscuro para los campos */
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: white;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus {
+    border-color: var(--accent-purple);
+    outline: none;
+}
+
+input[type="file"] {
+    padding: 8px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
 /* Sección Archivos */
+.files-section {
+    padding-top: 10px; /* Alineación visual con el formulario */
+}
+
 .files-section h2 {
     font-size: 1.3rem;
     margin-bottom: 1.5rem;
@@ -159,7 +192,7 @@ body {
 .delete { color: var(--text-muted); }
 .delete:hover { color: var(--danger); }
 
-/* --- BOTONES Y CAMPOS --- */
+/* --- BOTONES --- */
 .btn-upload {
     background: var(--accent-purple);
     color: white;
@@ -170,6 +203,11 @@ body {
     font-weight: 600;
     cursor: pointer;
     margin-top: 1rem;
+    transition: background 0.3s;
+}
+
+.btn-upload:hover {
+    background: var(--accent-hover, #818cf8);
 }
 
 .btn-cloudinary {
@@ -180,6 +218,18 @@ body {
     border: 1px solid #39c5bb;
     padding: 0.5rem 1rem;
     border-radius: 6px;
+    transition: 0.3s;
+}
+
+.btn-cloudinary:hover {
+    background-color: rgba(57, 197, 187, 0.1);
+}
+
+.empty-msg {
+    text-align: center;
+    color: var(--text-muted);
+    grid-column: 1 / -1;
+    padding: 2rem;
 }
 
 /* Responsivo */

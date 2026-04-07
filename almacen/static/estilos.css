@@ -11,6 +11,11 @@
     --danger: #f85149;         /* Rojo error */
 }
 
+/* --- CONFIGURACIÓN GLOBAL --- */
+html {
+    scroll-behavior: smooth; /* Permite que el botón 'Empezar' baje suavemente */
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -26,7 +31,7 @@ body {
     flex-direction: column;
 }
 
-/* --- HEADER (Basado en Video SrSpes) --- */
+/* --- HEADER (Estilo SrSpes) --- */
 .header {
     background-color: #0d1117;
     border-bottom: 1px solid var(--border);
@@ -44,10 +49,11 @@ body {
     margin: 0 auto;
 }
 
-.logo {
+.logo a {
     color: var(--accent-green);
     font-size: 1.5rem;
     font-weight: 800;
+    text-decoration: none;
 }
 
 .menu {
@@ -61,9 +67,16 @@ body {
     color: var(--text-main);
     font-size: 0.95rem;
     transition: 0.3s;
+    padding-bottom: 5px;
 }
 
 .menu li a:hover { color: var(--accent-green); }
+
+/* Estilo para el enlace resaltado de la página actual */
+.menu li a.active {
+    color: var(--accent-green);
+    border-bottom: 2px solid var(--accent-green);
+}
 
 .cta {
     background: var(--accent-green);
@@ -75,10 +88,10 @@ body {
     transition: 0.3s;
 }
 
-/* --- ESTRUCTURA DASHBOARD --- */
+/* --- ESTRUCTURA DASHBOARD (Dos columnas) --- */
 .main-content {
     display: grid;
-    grid-template-columns: 380px 1fr; /* Formulario a la izquierda, Archivos a la derecha */
+    grid-template-columns: 380px 1fr;
     gap: 2.5rem;
     max-width: 1400px;
     margin: 2rem auto;
@@ -102,7 +115,7 @@ body {
     margin-bottom: 1.5rem;
 }
 
-/* --- MEJORA DE CAMPOS DE FORMULARIO --- */
+/* --- MEJORA DE INPUTS Y FORMULARIO --- */
 .form-inputs p {
     margin-bottom: 15px;
 }
@@ -138,7 +151,6 @@ input[type="file"] {
 
 .files-section h2 {
     font-size: 1.3rem;
-    margin-bottom: 1.5rem;
     color: var(--text-muted);
 }
 
@@ -168,6 +180,7 @@ input[type="file"] {
     font-weight: 500;
     margin-bottom: 1rem;
     color: var(--text-main);
+    word-break: break-all; /* Evita que nombres largos rompan el diseño */
 }
 
 .btn-group {
@@ -207,7 +220,7 @@ input[type="file"] {
 }
 
 .btn-upload:hover {
-    background: var(--accent-hover, #818cf8);
+    background: #4f46e5;
 }
 
 .btn-cloudinary {
@@ -229,11 +242,11 @@ input[type="file"] {
     text-align: center;
     color: var(--text-muted);
     grid-column: 1 / -1;
-    padding: 2rem;
+    padding: 3rem;
 }
 
-/* Responsivo */
-@media (max-width: 900px) {
+/* Responsivo para móviles */
+@media (max-width: 950px) {
     .main-content { grid-template-columns: 1fr; }
     .upload-section { position: static; width: 100%; }
 }

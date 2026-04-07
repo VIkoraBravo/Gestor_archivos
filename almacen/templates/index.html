@@ -10,19 +10,28 @@
 <body>
     <header class="header">
         <nav class="nav">
-            <div class="logo">Vik</div>
+            <div class="logo">
+                <a href="{% url 'index' %}" style="text-decoration: none; color: inherit;">Vik</a>
+            </div>
+            
             <ul class="menu">
-                <li><a href="#">Inicio</a></li>
+                <li>
+                    <a href="{% url 'index' %}" 
+                       class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+                       Inicio
+                    </a>
+                </li>
                 <li><a href="#">Servicios</a></li>
                 <li><a href="#">Contacto</a></li>
             </ul>
-            <a href="#" class="cta">Empezar</a>
+            
+            <a href="#subir-archivo" class="cta">Empezar</a>
         </nav>
     </header>
 
     <div class="main-content">
         
-        <section class="upload-section">
+        <section id="subir-archivo" class="upload-section">
             <h1>☁️ Mi Nube Personal</h1>
             <form method="POST" enctype="multipart/form-data" action="{% url 'index' %}">
                 {% csrf_token %}
@@ -42,7 +51,16 @@
         </section>
 
         <section class="files-section">
-            <h2>📂 Tus Archivos</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 style="margin-bottom: 0;">📂 Tus Archivos</h2>
+                
+                <form method="GET" action="{% url 'index' %}" style="width: 50%;">
+                    <input type="text" name="q" placeholder="Buscar por título..." 
+                           value="{{ request.GET.q|default:'' }}"
+                           style="width: 100%; padding: 8px 15px; background: #161b22; border: 1px solid #30363d; border-radius: 8px; color: white; font-size: 0.9rem;">
+                </form>
+            </div>
+
             <div class="files-grid">
                 {% for doc in archivos %}
                 <div class="file-card">
@@ -59,7 +77,13 @@
                     </div>
                 </div>
                 {% empty %}
-                <p class="empty-msg">Tu nube está vacía actualmente.</p>
+                <p class="empty-msg">
+                    {% if request.GET.q %}
+                        No se encontraron archivos que coincidan con "{{ request.GET.q }}".
+                    {% else %}
+                        Tu nube está vacía actualmente.
+                    {% endif %}
+                </p>
                 {% endfor %}
             </div>
         </section>

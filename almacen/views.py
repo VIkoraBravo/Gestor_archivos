@@ -19,9 +19,8 @@ def subir_archivo(request):
 
 def eliminar_archivo(request, archivo_id):
     documento = get_object_or_404(Documento, id=archivo_id)
-    if documento.archivo:
-        if os.path.isfile(documento.archivo.path):
-            os.remove(documento.archivo.path)
-
+    
     documento.delete()
+    
+    # 3. Redirigimos al index
     return redirect('index')

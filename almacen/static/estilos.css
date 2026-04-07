@@ -17,7 +17,7 @@
     box-sizing: border-box;
 }
 
-/* --- CONFIGURACIÓN GLOBAL DEL CUERPO --- */
+
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);
@@ -31,11 +31,11 @@ body {
     line-height: 1.5;
 }
 
-/* --- ESTILOS DEL MENÚ (HEADER) --- */
+
 .header {
     background-color: #0f172a;
     padding: 15px 20px;
-    width: 100%; /* Asegura que el menú ocupe todo el ancho de la pantalla */
+    width: 100%; 
 }
 
 .nav {
@@ -90,7 +90,7 @@ body {
     max-width: 500px; 
     border: 1px solid var(--border);
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-    margin-top: 50px;    /* Espacio entre el menú y tu tarjeta de archivos */
+    margin-top: 50px;    
     margin-bottom: 50px;
 }
 
@@ -104,7 +104,6 @@ h1 {
     gap: 10px;
 }
 
-/* --- FORMULARIO Y BOTONES --- */
 form p { margin-bottom: 20px; }
 
 label {
@@ -157,7 +156,7 @@ input:focus {
 
 hr { border: 0; border-top: 1px solid var(--border); margin: 35px 0; }
 
-/* --- LISTA DE ARCHIVOS --- */
+
 .file-card { 
     background: #1c1c21;
     border: 1px solid var(--border);

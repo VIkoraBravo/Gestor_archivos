@@ -10,6 +10,64 @@
     --danger: #ef4444;         /* Rojo para borrar */
     --border: #2d2d33;         /* Bordes sutiles */
 }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background-color: #0f172a;
+    padding: 15px 20px;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #22c55e;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #e5e7eb;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.menu li a:hover {
+    color: #22c55e;
+}
+
+.cta {
+    text-decoration: none;
+    background-color: #22c55e;
+    color: #0f172a;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.cta:hover {
+    background-color: #16a34a;
+}
+
 
 body { 
     font-family: 'Inter', sans-serif; 
